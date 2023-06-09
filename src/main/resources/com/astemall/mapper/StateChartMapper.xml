@@ -25,7 +25,7 @@
 		group 
 			by c.ctgr_name
 		order 
-			by c.ctgr_name;
+			by c.ctgr_name
 	</select>
 	
 	<resultMap type="map" id="fcMapList">

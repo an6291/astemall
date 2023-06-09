@@ -50,7 +50,8 @@ public class StateChartServiceImpl implements StateChartService {
 		col1.put("label", "1차카테고리명");
 		col1.put("type", "string");
 		JSONObject col2 = new JSONObject();
-		col2.put("매출금액", "number");
+		col2.put("label", "매출금액");
+		col2.put("type", "number");
 		
 		title.add(col1);
 		title.add(col2);

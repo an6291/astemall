@@ -97,7 +97,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">상품등록</a></li>
+            <li><a href="/admin/chart/overall">상품 매출통계</a></li>
             <li><a href="#">상품목록</a></li>
           </ul>
         </li>
