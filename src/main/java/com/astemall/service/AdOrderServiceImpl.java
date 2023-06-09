@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.astemall.domain.OrderVO;
 import com.astemall.dto.AdOrderDetailDTO;
@@ -36,6 +37,18 @@ public class AdOrderServiceImpl implements AdOrderService {
 	@Override
 	public void order_de_prd_delete(Long ord_no, int prd_no) {
 		adOrderMapper.order_de_prd_delete(ord_no, prd_no);
+	}
+
+	@Transactional  // 트랜젝션 적용
+	@Override
+	public void order_info_delete(Long ord_no) {
+		
+		// 주문상세정보 삭제
+		adOrderMapper.order_detail_delete(ord_no);
+		// 주문정보 삭제
+		adOrderMapper.order_delete(ord_no);
+		// 결제정보 삭제
+		adOrderMapper.payment_delete(ord_no);
 	}
 	
 }

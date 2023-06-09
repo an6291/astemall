@@ -54,6 +54,16 @@ public class AdOrderController {
 		
 	}
 	
+	// 주문 삭제.  Ajax
+	@ResponseBody
+	@PostMapping("/order_info_delete")
+	public ResponseEntity<String> order_info_delete(Long ord_no){
+		ResponseEntity<String> entity = null;
+		adOrderService.order_info_delete(ord_no);
+		entity = new ResponseEntity<String>("success", HttpStatus.OK); 
+		return entity;
+	}
+	
 	// 주문 상세. Ajax
 	@ResponseBody
 	@GetMapping("/order_detail")

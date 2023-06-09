@@ -95,8 +95,8 @@
   			prd_no = #{prd_no}
   	</delete>
   	
-  	<!-- 
-  	<update id="updateOrder">
+  	<!-- 주문 상세 - 상품 삭제 - 주문 총 금액 업데이트  -->
+  	<update id="updateTotPrice">
   		update
   			order_tb
   		set
@@ -104,8 +104,28 @@
   		where
   			ord_no = #{ord_no}
   	</update>
-  	 -->
   	
+  	<!-- 주문 삭제 -->
+  	<delete id="order_delete">
+  		delete from
+  			order_detail_tb
+  		where
+  			ord_no = #{ord_no}
+  	</delete>
+  	
+  	<delete id="order_detail_delete">
+  		delete from
+  			order_tb
+  		where
+  			ord_no = #{ord_no}
+  	</delete>
+  	
+  	<delete id="payment_delete">
+  		delete from
+  			payment_tb
+  		where
+  			ord_no = #{ord_no}
+  	</delete>
   	
   	
 </mapper>

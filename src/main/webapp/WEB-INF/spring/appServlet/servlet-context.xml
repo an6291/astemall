@@ -50,4 +50,21 @@
 		<beans:constructor-arg value="TC0ONETIME" />
 	</beans:bean>
 	
+	<!-- 인터셉터 설정 -->
+	 <beans:bean id="loginInterceptor" class="com.astemall.interceptor.LoginInterceptor" />
+	
+	 <interceptors>
+	 	<interceptor>
+			<!-- 인터셉터를 탈 매핑주소 추가. 로그인 인증 체크를 받을 주소를 추가. -->
+			<!-- Controller에서 체크. 보통 GET 방식. -->
+			<mapping path="/member/mypage"/>
+			<mapping path="/member/modify"/>
+			<mapping path="/cart/*"/>
+			<mapping path="/order/*"/>
+			<!-- exclude-mapping : 제외시킬 매핑주소. exclude-mapping을 mapping보다 먼저 작성하지 않는다. -->
+			<exclude-mapping path="/cart/displayImage"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	 </interceptors>
+	
 </beans:beans>

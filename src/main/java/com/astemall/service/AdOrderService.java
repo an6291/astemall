@@ -18,5 +18,8 @@ public interface AdOrderService {
 	
 	// 주문 상세 - 상품 삭제
 	void order_de_prd_delete(Long ord_no, int prd_no);
+	
+	// 주문 삭제
+	void order_info_delete(Long ord_no);
 
 }

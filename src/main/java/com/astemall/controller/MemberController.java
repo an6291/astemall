@@ -1,5 +1,7 @@
 package com.astemall.controller;
 
+import java.nio.channels.SeekableByteChannel;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +96,16 @@ public class MemberController {
 			if(passwordEncoder.matches(dto.getMb_pw(), vo.getMb_pw())) {
 				session.setAttribute("loginStatus", vo);  // 로그인한 사용자의 회원정보가 세션형태로 저장
 				memberService.now_visit(dto.getMb_id());  // 로그인 시간 업데이트
-				url = "/";  // 비밀번호가 맞는 경우 -> 메인페이지로
+				
+				// (비밀번호가 맞는 경우) 강제로 로그인페이지로 이동하기 이전의 매핑주소와 정보 존재 유무 확인 - 인터셉터 기능
+				String targetUrl = (String) session.getAttribute("dest");
+				url = (targetUrl != null) ? targetUrl : "/";  // targetUrl이 존재-targetUrl로 이동 / null이면-메인페이지로 이동
+				
+				// 세션제거 
+				if(targetUrl != null) {
+					session.removeAttribute("dest");
+				}
+				
 			}else {
 				url = "/member/login";  // 비밀번호가 틀린 경우 -> 로그인 페이지로
 				msg = "failPW";

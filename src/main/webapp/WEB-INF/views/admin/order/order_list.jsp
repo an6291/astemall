@@ -255,6 +255,28 @@
       });
     });
 
+    // 삭제 버튼 클릭.  Ajax
+    $("button[name='btn_orderDelete']").on("click", function(){
+      
+      if(!confirm("주문을 삭제하시겠습니까?")) return;
+      
+      let ord_no = $(this).data("ord_no");  // 상품번호
+
+      $.ajax({
+        url: '/admin/order/order_info_delete',
+        type: 'post',
+        data: {ord_no:ord_no},
+        dataType: 'text',
+        success: function(result){
+          if(result == 'success'){
+            alert("주문이 삭제되었습니다.");
+            location.href="/admin/order/order_list";    // 페이징 기능 적용 필요
+          }
+        }
+      });
+      
+    });
+
     // 상세보기 - 상품삭제 클릭
     $("div#modalDetailView").on("click", "button[name='btn_orderProductDel']", function(){
       //console.log("상품삭제 클릭");
